@@ -282,14 +282,18 @@ def new_session():
 
 CSS = r"""
 :root {
-    --bg: #0b0f19;
-    --panel: #111827;
-    --panel-2: #172033;
-    --border: rgba(148, 163, 184, 0.16);
+    --bg: #080b12;
+    --surface: #101521;
+    --surface-2: #151c2b;
+    --surface-3: #1b2435;
+    --border: rgba(148, 163, 184, 0.15);
+    --border-strong: rgba(99, 102, 241, 0.45);
     --text: #f8fafc;
     --muted: #94a3b8;
+    --muted-2: #64748b;
     --accent: #6366f1;
     --accent-2: #3b82f6;
+    --success: #34d399;
 }
 
 * {
@@ -298,13 +302,10 @@ CSS = r"""
 
 html,
 body {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    width: 100% !important;
+    min-height: 100% !important;
     background: var(--bg) !important;
     font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
         "Segoe UI", Roboto, sans-serif !important;
@@ -312,129 +313,103 @@ body {
 
 .gradio-container {
     width: 100% !important;
-    height: 100vh !important;
+    max-width: none !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
-    max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
-    background: var(--bg) !important;
+    background:
+        radial-gradient(circle at 50% -20%, rgba(99,102,241,0.14), transparent 42%),
+        var(--bg) !important;
     color: var(--text) !important;
-}
-
-.gradio-container > div,
-.gradio-container .main {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
 }
 
 footer {
     display: none !important;
 }
 
+/* Main application */
 .app-shell {
     width: 100% !important;
-    height: 100vh !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
     display: flex !important;
-    align-items: center !important;
     justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: var(--bg) !important;
+    padding: 34px 22px 30px !important;
 }
 
 .main-page {
-    width: min(1180px, calc(100vw - 72px)) !important;
-    height: calc(100vh - 44px) !important;
-    max-height: calc(100vh - 44px) !important;
+    width: min(1000px, 100%) !important;
+    min-height: calc(100vh - 64px) !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 16px !important;
-    padding: 18px 0 92px !important;
-    margin: 0 !important;
-    overflow: hidden !important;
+    gap: 18px !important;
+    padding: 0 !important;
 }
 
 /* Header */
+.header {
+    text-align: center !important;
+    padding: 8px 0 6px !important;
+}
+
+.logo {
+    width: 48px !important;
+    height: 48px !important;
+    margin: 0 auto 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+    box-shadow: 0 10px 30px rgba(59,130,246,0.22) !important;
+    font-size: 23px !important;
+}
+
 .brand {
-    flex: 0 0 auto !important;
     margin: 0 !important;
-    padding: 0 8px !important;
-    color: #ffffff !important;
-    font-size: 30px !important;
+    color: var(--text) !important;
+    font-size: 31px !important;
     line-height: 1.15 !important;
     font-weight: 800 !important;
-    letter-spacing: -0.7px !important;
+    letter-spacing: -0.8px !important;
 }
 
 .brand-subtitle {
-    margin-top: 5px !important;
+    margin-top: 8px !important;
     color: var(--muted) !important;
     font-size: 14px !important;
-    font-weight: 400 !important;
+    line-height: 1.5 !important;
 }
 
-/* Upload card */
-.upload-card {
-    flex: 0 0 auto !important;
+/* Document card */
+.document-card {
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
-    background: var(--panel) !important;
+    padding: 20px !important;
+    background: rgba(16,21,33,0.92) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 14px !important;
-    overflow: hidden !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.20) !important;
 }
 
-.upload-card > .label-wrap,
-.upload-card summary {
-    min-height: 48px !important;
-    padding: 0 18px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+.section-title {
+    margin: 0 0 5px !important;
     color: var(--text) !important;
-    background: rgba(255,255,255,0.018) !important;
-    border-bottom: 1px solid rgba(148,163,184,0.10) !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
 }
 
-.upload-card .wrap {
-    padding: 0 !important;
+.section-subtitle {
+    margin: 0 0 15px !important;
+    color: var(--muted) !important;
+    font-size: 12.5px !important;
 }
 
-.upload-body {
-    padding: 12px 18px 14px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 9px !important;
-}
-
-/* The old Collection Name and upload-type controls are removed
-   from the visible interface. */
-
-.upload-type-title,
-.upload-radio,
-.url-picker {
-    display: none !important;
-}
-
-/* Compact file picker */
+/* Upload area */
 .file-picker {
     width: 100% !important;
-    height: 58px !important;
-    min-height: 58px !important;
-    max-height: 58px !important;
+    min-height: 118px !important;
+    height: 118px !important;
     margin: 0 !important;
-    overflow: hidden !important;
 }
 
 .file-picker > label {
@@ -444,171 +419,231 @@ footer {
 .file-picker .wrap,
 .file-picker .upload-container,
 .file-picker .drop-zone,
-.file-picker [data-testid="file-upload"],
-.file-picker .file-preview,
-.file-picker .single-file {
-    min-height: 58px !important;
-    height: 58px !important;
-    max-height: 58px !important;
+.file-picker [data-testid="file-upload"] {
     width: 100% !important;
-    padding: 7px 12px !important;
+    min-height: 118px !important;
+    height: 118px !important;
     margin: 0 !important;
+    padding: 20px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 10px !important;
-    background: var(--panel-2) !important;
-    border: 1px dashed rgba(99,102,241,0.45) !important;
-    border-radius: 10px !important;
-    color: #cbd5e1 !important;
+    background: var(--surface-2) !important;
+    border: 1px dashed var(--border-strong) !important;
+    border-radius: 14px !important;
+    color: var(--muted) !important;
+    transition: 0.2s ease !important;
 }
 
 .file-picker .drop-zone:hover,
 .file-picker [data-testid="file-upload"]:hover,
 .file-picker .upload-container:hover {
+    background: var(--surface-3) !important;
     border-color: var(--accent) !important;
-    background: #1b263b !important;
 }
 
 .file-picker svg {
-    width: 21px !important;
-    height: 21px !important;
+    width: 25px !important;
+    height: 25px !important;
 }
 
 .file-picker p,
 .file-picker span,
 .file-picker div {
-    font-size: 12.5px !important;
+    font-size: 13px !important;
 }
 
 .file-picker button {
-    min-height: 32px !important;
-    height: 32px !important;
-    padding: 4px 14px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 5px 16px !important;
     border: 0 !important;
-    border-radius: 7px !important;
+    border-radius: 8px !important;
     background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
-    color: #ffffff !important;
+    color: white !important;
     font-size: 12px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
 }
 
-/* Status */
+/* Upload status */
 .status {
-    min-height: 30px !important;
-    margin: 0 !important;
-    padding: 6px 11px !important;
-    background: rgba(16,185,129,0.07) !important;
-    border: 1px solid rgba(16,185,129,0.16) !important;
-    border-radius: 8px !important;
-    color: #34d399 !important;
+    min-height: 0 !important;
+    margin: 12px 0 0 !important;
+    padding: 9px 12px !important;
+    background: rgba(52,211,153,0.06) !important;
+    border: 1px solid rgba(52,211,153,0.13) !important;
+    border-radius: 9px !important;
+    color: var(--success) !important;
     font-size: 12px !important;
-    line-height: 1.35 !important;
 }
 
 .status p {
     margin: 0 !important;
 }
 
-/* Document selector remains available internally but is not shown. */
+/* Hide internal document selector */
 .document-selector {
     display: none !important;
 }
 
-/* Chat */
-.chat-window {
-    flex: 1 1 auto !important;
+/* Chat area */
+.chat-card {
     width: 100% !important;
     min-height: 0 !important;
-    height: auto !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
     margin: 0 !important;
-    padding: 12px !important;
-    background: var(--panel) !important;
+    padding: 18px !important;
+    background: rgba(16,21,33,0.92) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 14px !important;
+    border-radius: 18px !important;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18) !important;
+}
+
+.chat-heading {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 12px !important;
+}
+
+.chat-heading-title {
+    color: var(--text) !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+}
+
+.chat-heading-badge {
+    padding: 4px 9px !important;
+    border-radius: 999px !important;
+    background: rgba(99,102,241,0.10) !important;
+    color: #a5b4fc !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.4px !important;
+    text-transform: uppercase !important;
+}
+
+.chat-window {
+    width: 100% !important;
+    min-height: 320px !important;
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    padding: 6px !important;
+    background: transparent !important;
+    border: 0 !important;
     overflow: auto !important;
 }
 
 .chat-window .message {
     font-size: 14px !important;
-    line-height: 1.55 !important;
-    padding: 10px 14px !important;
-    border-radius: 12px !important;
-    margin-bottom: 9px !important;
+    line-height: 1.6 !important;
+    padding: 11px 14px !important;
+    border-radius: 13px !important;
+    margin-bottom: 10px !important;
 }
 
 .chat-window [data-testid="user"],
 .chat-window .user {
-    max-width: 72% !important;
+    max-width: 76% !important;
     margin-left: auto !important;
     background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
-    color: #ffffff !important;
+    color: white !important;
     border-radius: 14px 14px 4px 14px !important;
 }
 
 .chat-window [data-testid="bot"],
 .chat-window .bot {
-    max-width: 78% !important;
+    max-width: 82% !important;
     margin-right: auto !important;
-    background: var(--panel-2) !important;
+    background: var(--surface-2) !important;
     color: #e2e8f0 !important;
-    border: 1px solid rgba(148,163,184,0.12) !important;
+    border: 1px solid var(--border) !important;
     border-radius: 14px 14px 14px 4px !important;
 }
 
-/* Fixed composer */
-.ask-dock {
-    position: fixed !important;
-    z-index: 1000 !important;
-    left: 50% !important;
-    bottom: 16px !important;
-    transform: translateX(-50%) !important;
-    width: min(1180px, calc(100vw - 72px)) !important;
+/* Empty chat state */
+.empty-chat {
+    width: 100% !important;
+    min-height: 250px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    color: var(--muted) !important;
+}
+
+.empty-icon {
+    width: 54px !important;
+    height: 54px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 12px !important;
+    border-radius: 16px !important;
+    background: var(--surface-2) !important;
+    border: 1px solid var(--border) !important;
+    font-size: 24px !important;
+}
+
+.empty-title {
+    color: #cbd5e1 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.empty-text {
+    max-width: 430px !important;
+    margin-top: 5px !important;
+    color: var(--muted-2) !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+}
+
+/* Bottom composer */
+.composer {
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: transparent !important;
 }
 
 .ask-row {
     position: relative !important;
     width: 100% !important;
-    height: 54px !important;
-    min-height: 54px !important;
-    padding: 5px 10px 5px 17px !important;
+    min-height: 58px !important;
+    padding: 6px 62px 6px 18px !important;
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
-    background: rgba(17,24,39,0.96) !important;
+    background: rgba(16,21,33,0.96) !important;
     border: 1px solid rgba(148,163,184,0.20) !important;
-    border-radius: 28px !important;
-    box-shadow: 0 12px 34px rgba(0,0,0,0.42) !important;
-    backdrop-filter: blur(14px) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.28) !important;
 }
 
 .question-box {
-    flex: 1 1 auto !important;
     width: 100% !important;
     margin: 0 !important;
 }
 
 .question-box textarea {
     width: 100% !important;
-    height: 42px !important;
-    min-height: 42px !important;
-    max-height: 42px !important;
-    padding: 0 48px 0 0 !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    max-height: 44px !important;
+    padding: 10px 0 !important;
     border: 0 !important;
     outline: 0 !important;
     box-shadow: none !important;
     background: transparent !important;
-    color: #f8fafc !important;
+    color: var(--text) !important;
     font-size: 14px !important;
-    line-height: 42px !important;
     resize: none !important;
 }
 
 .question-box textarea::placeholder {
-    color: #64748b !important;
+    color: var(--muted-2) !important;
 }
 
 .ask-button {
@@ -616,45 +651,91 @@ footer {
     right: 9px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
     padding: 0 !important;
     border: 0 !important;
-    border-radius: 50% !important;
+    border-radius: 12px !important;
     background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
-    color: #ffffff !important;
+    color: white !important;
     font-size: 0 !important;
+    transition: 0.2s ease !important;
 }
 
 .ask-button::after {
-    content: "→" !important;
+    content: "↑" !important;
     display: block !important;
-    font-size: 19px !important;
-    line-height: 36px !important;
+    font-size: 20px !important;
+    line-height: 40px !important;
     text-align: center !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
 }
 
 .ask-button:hover {
-    transform: translateY(-50%) scale(1.05) !important;
+    transform: translateY(-50%) scale(1.04) !important;
 }
 
-/* Smaller screens */
-@media (max-width: 900px) {
-    .main-page {
-        width: calc(100vw - 28px) !important;
-        height: calc(100vh - 30px) !important;
-        padding-top: 12px !important;
+/* Clear button */
+.clear-button {
+    align-self: center !important;
+    margin-top: 9px !important;
+    padding: 4px 9px !important;
+    background: transparent !important;
+    border: 0 !important;
+    color: var(--muted-2) !important;
+    font-size: 11px !important;
+}
+
+.clear-button:hover {
+    color: #cbd5e1 !important;
+    background: transparent !important;
+}
+
+/* Hide clear button when not needed */
+.clear-button.hidden {
+    display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .app-shell {
+        padding: 18px 12px 20px !important;
     }
 
-    .ask-dock {
-        width: calc(100vw - 28px) !important;
-        bottom: 10px !important;
+    .main-page {
+        min-height: calc(100vh - 38px) !important;
+        gap: 12px !important;
     }
 
     .brand {
-        font-size: 25px !important;
+        font-size: 26px !important;
+    }
+
+    .document-card,
+    .chat-card {
+        padding: 14px !important;
+        border-radius: 14px !important;
+    }
+
+    .file-picker,
+    .file-picker .wrap,
+    .file-picker .upload-container,
+    .file-picker .drop-zone,
+    .file-picker [data-testid="file-upload"] {
+        min-height: 105px !important;
+        height: 105px !important;
+    }
+
+    .chat-window {
+        min-height: 260px !important;
+    }
+
+    .chat-window [data-testid="user"],
+    .chat-window .user,
+    .chat-window [data-testid="bot"],
+    .chat-window .bot {
+        max-width: 92% !important;
     }
 }
 """
@@ -664,7 +745,7 @@ footer {
 # UI
 # ============================================================
 
-with gr.Blocks(title="RAG Chat Assistant") as demo:
+with gr.Blocks(title="MiniRAG — Document AI Assistant") as demo:
 
     state = gr.State()
 
@@ -672,41 +753,51 @@ with gr.Blocks(title="RAG Chat Assistant") as demo:
 
         with gr.Column(elem_classes="main-page"):
 
-            gr.HTML(
-                """
-                <div class="brand">
-                    RAG Chat Assistant
+            # ------------------------------------------------
+            # HEADER
+            # ------------------------------------------------
+            with gr.Column(elem_classes="header"):
+
+                gr.HTML(
+                    """
+                    <div class="logo">✦</div>
+                    <div class="brand">MiniRAG</div>
                     <div class="brand-subtitle">
-                        Ask questions grounded in your documents
+                        Chat with your documents using retrieval-augmented generation
                     </div>
-                </div>
-                """
-            )
+                    """
+                )
 
-            # Clean first-load design:
-            # Collection Name and Choose Upload Type are removed.
-            with gr.Accordion(
-                "Upload Documents",
-                open=True,
-                elem_classes="upload-card",
-            ):
-                with gr.Column(elem_classes="upload-body"):
+            # ------------------------------------------------
+            # DOCUMENT UPLOAD
+            # ------------------------------------------------
+            with gr.Column(elem_classes="document-card"):
 
-                    file_upload = gr.File(
-                        label="Upload document",
-                        file_types=[".pdf", ".txt", ".docx"],
-                        file_count="single",
-                        type="filepath",
-                        elem_classes="file-picker",
-                    )
+                gr.HTML(
+                    """
+                    <div class="section-title">📄 Add a document</div>
+                    <div class="section-subtitle">
+                        Upload a PDF, DOCX, or TXT file to start asking questions.
+                    </div>
+                    """
+                )
 
-                    upload_status = gr.Markdown(
-                        "Ready to upload a document.",
-                        elem_classes="status",
-                    )
+                file_upload = gr.File(
+                    label="Upload document",
+                    file_types=[".pdf", ".txt", ".docx"],
+                    file_count="single",
+                    type="filepath",
+                    elem_classes="file-picker",
+                )
 
-            # Kept internally so the existing session/document logic
-            # continues to work. It is hidden from the user.
+                upload_status = gr.Markdown(
+                    "Ready to upload a document.",
+                    elem_classes="status",
+                )
+
+            # ------------------------------------------------
+            # INTERNAL DOCUMENT SELECTOR
+            # ------------------------------------------------
             document_selector = gr.Dropdown(
                 choices=[],
                 value=None,
@@ -715,29 +806,64 @@ with gr.Blocks(title="RAG Chat Assistant") as demo:
                 elem_classes="document-selector",
             )
 
-            chatbot = gr.Chatbot(
-                show_label=False,
-                visible=False,
-                height=300,
-                elem_classes="chat-window",
-            )
+            # ------------------------------------------------
+            # CHAT
+            # ------------------------------------------------
+            with gr.Column(elem_classes="chat-card"):
 
-        # Fixed question composer
-        with gr.Column(elem_classes="ask-dock"):
-
-            with gr.Column(elem_classes="ask-row"):
-
-                question_box = gr.Textbox(
-                    placeholder="Ask me anything...",
-                    show_label=False,
-                    lines=1,
-                    max_lines=1,
-                    elem_classes="question-box",
+                gr.HTML(
+                    """
+                    <div class="chat-heading">
+                        <div class="chat-heading-title">💬 Conversation</div>
+                        <div class="chat-heading-badge">Document grounded</div>
+                    </div>
+                    """
                 )
 
-                ask_button = gr.Button(
-                    "",
-                    elem_classes="ask-button",
+                chatbot = gr.Chatbot(
+                    show_label=False,
+                    visible=False,
+                    height=390,
+                    elem_classes="chat-window",
+                )
+
+                gr.HTML(
+                    """
+                    <div class="empty-chat">
+                        <div class="empty-icon">📚</div>
+                        <div class="empty-title">Your document conversation starts here</div>
+                        <div class="empty-text">
+                            Upload a document above, then ask a question.
+                            MiniRAG will answer using the information retrieved from your document.
+                        </div>
+                    </div>
+                    """
+                )
+
+            # ------------------------------------------------
+            # QUESTION COMPOSER
+            # ------------------------------------------------
+            with gr.Column(elem_classes="composer"):
+
+                with gr.Column(elem_classes="ask-row"):
+
+                    question_box = gr.Textbox(
+                        placeholder="Ask a question about your document...",
+                        show_label=False,
+                        lines=1,
+                        max_lines=1,
+                        elem_classes="question-box",
+                    )
+
+                    ask_button = gr.Button(
+                        "",
+                        elem_classes="ask-button",
+                    )
+
+                clear_button = gr.Button(
+                    "Clear conversation",
+                    elem_classes="clear-button",
+                    visible=False,
                 )
 
 
@@ -775,7 +901,9 @@ with gr.Blocks(title="RAG Chat Assistant") as demo:
     )
 
 
-# ============================================================
+    # ============================================================
+
+
 # START
 # ============================================================
 

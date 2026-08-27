@@ -5,8 +5,8 @@ from typing import Any
 import chromadb
 from sentence_transformers import SentenceTransformer
 
-from chunker import recursive_chunk
-from loader import load_document
+from src.chunker import recursive_chunk
+from src.loader import load_document
 
 
 # ==================================================

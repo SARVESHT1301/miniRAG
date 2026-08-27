@@ -1,6 +1,6 @@
 from typing import Any
 
-from memory import ConversationMemory
+from src.memory import ConversationMemory
 
 
 # ==================================================

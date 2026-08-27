@@ -4,8 +4,8 @@ from typing import Any
 
 import gradio as gr
 
-from rag_pipeline import ingest, ask
-from session import Session
+from src.rag_pipeline import ingest, ask
+from src.session import Session
 
 
 # ============================================================

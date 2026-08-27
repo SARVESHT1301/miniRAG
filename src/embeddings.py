@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer
-from chunker import recursive_chunk
-from loader import load_document
+from src.chunker import recursive_chunk
+from src.loader import load_document
 
 # Load model once
 model = SentenceTransformer("all-MiniLM-L6-v2")
